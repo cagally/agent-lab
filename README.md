@@ -23,22 +23,24 @@ agent-lab/
 
 ## 🎯 Current Status
 
-**Last Updated:** Dec 23, 2025
+**Last Updated:** Dec 23, 2025 - Session 1
 
 ### ✅ Completed
-- Repository structure established
+- Repository structure established with organized folders
 - Project vision documented
 - Knowledge base protocol defined
+- **Evaluation framework designed** (5 dimensions: Clarity, Activation Reliability, Performance, Hallucination Risk, Use Case Fit)
+- **GPT-based evaluator prompt created** for automated skill assessment
+- GitHub authentication configured and working
 
 ### 🚧 In Progress
-- Evaluation framework design
-- Initial skill data collection (targeting 20-50 Anthropic skills)
+- Ready to collect initial skill data from Anthropic's GitHub
 
 ### 📋 Next Steps
-1. Finalize evaluation framework and criteria
-2. Pull and analyze 20-50 skills from Anthropic's public GitHub
-3. Run evaluations and generate scorecards
-4. Build MVP website (discovery interface + skill cards)
+1. Pull 20-50 skills from Anthropic's public GitHub repository
+2. Build automation script to run evaluations
+3. Generate scorecards for all initial skills
+4. Design and build MVP website (discovery interface + skill cards)
 5. Deploy and launch
 
 ---
@@ -67,6 +69,8 @@ agent-lab/
 ## 🚀 Quick Links
 
 - **Vision Doc:** `/home/ubuntu/projects/agent-lab-6ac8daa1/Agent Skills Platform V.0001.md`
+- **Evaluation Framework:** `/evaluations/framework.md`
+- **GPT Evaluator Prompt:** `/evaluations/gpt-evaluator-prompt.md`
 - **Anthropic Skills:** https://github.com/anthropics/skills
 - **Claude Skills Docs:** https://code.claude.com/docs/en/skills
 
