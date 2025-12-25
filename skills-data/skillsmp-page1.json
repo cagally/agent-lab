@@ -1,0 +1,98 @@
+[
+  {
+    "rank": 1,
+    "name": "at-dispatch-v2",
+    "stars": "95.4k",
+    "repository": "pytorch/pytorch",
+    "url": "https://skillsmp.com/skills/pytorch-pytorch-claude-skills-at-dispatch-v2-skill-md",
+    "description": ""
+  },
+  {
+    "rank": 2,
+    "name": "add-uint-support",
+    "stars": "95.4k",
+    "repository": "pytorch/pytorch",
+    "url": "https://skillsmp.com/skills/pytorch-pytorch-claude-skills-add-uint-support-skill-md",
+    "description": ""
+  },
+  {
+    "rank": 3,
+    "name": "skill-writer",
+    "stars": "95.4k",
+    "repository": "pytorch/pytorch",
+    "url": "https://skillsmp.com/skills/pytorch-pytorch-claude-skills-skill-writer-skill-md",
+    "description": ""
+  },
+  {
+    "rank": 4,
+    "name": "docstring",
+    "stars": "95.4k",
+    "repository": "pytorch/pytorch",
+    "url": "https://skillsmp.com/skills/pytorch-pytorch-claude-skills-docstring-skill-md",
+    "description": ""
+  },
+  {
+    "rank": 5,
+    "name": "skill-creator",
+    "stars": "54.5k",
+    "repository": "openai/codex",
+    "url": "https://skillsmp.com/skills/openai-codex-codex-rs-core-src-skills-assets-samples-skill-creator-skill-md",
+    "description": ""
+  },
+  {
+    "rank": 6,
+    "name": "skill-installer",
+    "stars": "54.5k",
+    "repository": "openai/codex",
+    "url": "https://skillsmp.com/skills/openai-codex-codex-rs-core-src-skills-assets-samples-skill-installer-skill-md",
+    "description": ""
+  },
+  {
+    "rank": 7,
+    "name": "frontend-design",
+    "stars": "47.9k",
+    "repository": "anthropics/claude-code",
+    "url": "https://skillsmp.com/skills/anthropics-claude-code-plugins-frontend-design-skills-frontend-design-skill-md",
+    "description": ""
+  },
+  {
+    "rank": 8,
+    "name": "hook-development",
+    "stars": "47.9k",
+    "repository": "anthropics/claude-code",
+    "url": "https://skillsmp.com/skills/anthropics-claude-code-plugins-plugin-dev-skills-hook-development-skill-md",
+    "description": ""
+  },
+  {
+    "rank": 9,
+    "name": "command-development",
+    "stars": "47.9k",
+    "repository": "anthropics/claude-code",
+    "url": "https://skillsmp.com/skills/anthropics-claude-code-plugins-plugin-dev-skills-command-development-skill-md",
+    "description": ""
+  },
+  {
+    "rank": 10,
+    "name": "agent-identifier",
+    "stars": "47.9k",
+    "repository": "anthropics/claude-code",
+    "url": "https://skillsmp.com/skills/anthropics-claude-code-plugins-plugin-dev-skills-agent-development-skill-md",
+    "description": ""
+  },
+  {
+    "rank": 11,
+    "name": "rule-identifier",
+    "stars": "47.9k",
+    "repository": "anthropics/claude-code",
+    "url": "https://skillsmp.com/skills/anthropics-claude-code-plugins-hookify-skills-writing-rules-skill-md",
+    "description": ""
+  },
+  {
+    "rank": 12,
+    "name": "mcp-integration",
+    "stars": "47.9k",
+    "repository": "anthropics/claude-code",
+    "url": "https://skillsmp.com/skills/anthropics-claude-code-plugins-plugin-dev-skills-mcp-integration-skill-md",
+    "description": ""
+  }
+]
