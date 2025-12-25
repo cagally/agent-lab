@@ -37,7 +37,7 @@ Our rubric is designed to directly address the user pain points identified in ou
 | | **Task Completion** | Pass/Fail | Addresses core reliability. The skill must be able to complete its fundamental stated purpose. |
 | **Quality Criteria** | **Output Consistency** | Scored (0-10) | Solves the "same prompt, different results" frustration, ensuring predictability. |
 | | **Token Efficiency** | Scored (0-10) | Addresses explicit user complaints about cost and "burning through tokens." |
-| | **Context Safety** | Scored (0-10) | Prevents silent failures from exceeding the context window, a hidden but critical issue. |
+| | **Description Efficiency** | Scored (0-10) | Measures the quality, clarity, and conciseness of the skill description—the primary factor in activation reliability. |
 | | **Grounding & Faithfulness** | Scored (0-10) | Measures the rate of hallucination and factual inaccuracy, building user trust. |
 | | **Failure Mode Resistance** | Scored (0-10) | Quantifies how gracefully a skill handles edge cases, ambiguity, and adversarial prompts. |
 | **Metadata** | **Maintenance Status** | Informational | Addresses user concerns about stale or abandoned skills. |
@@ -55,7 +55,7 @@ These metrics are graded on a 0-10 scale using a combination of automated analys
 
 *   **Output Consistency:** We run the same prompt 3-5 times and measure the semantic similarity of the outputs. High scores are given for deterministic skills or generative skills with low, controlled variance.
 *   **Token Efficiency:** We measure both the static cost (description length) and the dynamic cost (average execution tokens) against a no-skill baseline to calculate the true overhead.
-*   **Context Safety:** A fully automated check of the skill's description length against the context window limit (e.g., 15k characters). Skills that consume a dangerous percentage of the budget are penalized heavily.
+*   **Description Efficiency:** We analyze the skill's description field (max 1024 chars) for clarity, specificity, and information density using GPT-5. Skills with vague, verbose, or poorly-structured descriptions are penalized, as the description is the primary trigger for skill activation.
 *   **Grounding & Faithfulness:** For skills that make factual claims or use external data, we measure the rate of hallucination. This is critical for building trust.
 *   **Failure Mode Resistance:** We intentionally test the skill with ambiguous, complex, and adversarial prompts to see how it behaves. Does it ask clarifying questions, fail gracefully, or produce garbage output?
 
