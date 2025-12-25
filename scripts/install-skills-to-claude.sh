@@ -12,7 +12,9 @@
 
 set -e
 
-SKILLS_SOURCE="/home/ubuntu/agent-lab/skills-data/raw-skills"
+# Get the script directory and construct relative path
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+SKILLS_SOURCE="$SCRIPT_DIR/../skills-data/raw-skills"
 CLAUDE_SKILLS_DIR="$HOME/.claude/skills"
 
 # Colors for output
