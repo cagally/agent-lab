@@ -147,8 +147,8 @@ def read_skill_file(skill_dir):
     }
 
 
-def generate_prompt(client, template, skill_name, skill_description):
-    """Generate a single test prompt using Claude API."""
+def generate_prompt(client, template, skill_name, skill_description, max_retries=3):
+    """Generate a single test prompt using Claude API with retry logic."""
     
     # Fill template
     prompt = template.format(
@@ -156,21 +156,30 @@ def generate_prompt(client, template, skill_name, skill_description):
         skill_description=skill_description
     )
     
-    # Call API
-    response = client.messages.create(
-        model=MODEL,
-        max_tokens=500,
-        temperature=1.0,  # Higher temperature for creativity
-        messages=[{
-            "role": "user",
-            "content": prompt
-        }]
-    )
-    
-    # Extract text
-    generated_text = response.content[0].text.strip()
-    
-    return generated_text
+    # Retry loop
+    for attempt in range(max_retries):
+        try:
+            # Call API
+            response = client.messages.create(
+                model=MODEL,
+                max_tokens=500,
+                temperature=1.0,  # Higher temperature for creativity
+                messages=[{
+                    "role": "user",
+                    "content": prompt
+                }]
+            )
+            
+            # Extract text
+            generated_text = response.content[0].text.strip()
+            return generated_text
+            
+        except Exception as e:
+            if attempt < max_retries - 1:
+                print(f"  ⚠️  Retry {attempt + 1}/{max_retries - 1} after error: {e}")
+                time.sleep(1.5)  # Wait before retry
+            else:
+                raise  # Re-raise on final attempt
 
 
 def generate_prompts_for_skill(client, skill):
@@ -224,8 +233,8 @@ def generate_prompts_for_skill(client, skill):
                 
                 print(f"✓ Generated: {generated_prompt[:80]}...")
                 
-                # Rate limiting
-                time.sleep(1)
+                # Rate limiting (1.5 seconds to avoid API limits)
+                time.sleep(1.5)
                 
             except Exception as e:
                 print(f"✗ Error: {e}")
