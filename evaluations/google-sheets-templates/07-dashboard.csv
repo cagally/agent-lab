@@ -1,0 +1,19 @@
+Metric,Value
+Total Skills Evaluated,1
+Average Score,93.0
+Highest Rated Skill,pytorch-skill-writer (93.0)
+Lowest Rated Skill,pytorch-skill-writer (93.0)
+Skills Complete,1
+Skills In Progress,0
+Skills Not Started,11
+,
+Dimension Averages,
+Token Efficiency,9.0
+Security Audit,10.0
+Description Efficiency,8.5
+Activation Rate,10.0
+Output Consistency,9.5
+Multi-Skill Compatibility,9.0
+Failure Mode Resistance,8.0
+Task Completion,10.0
+Grounding & Faithfulness,9.0

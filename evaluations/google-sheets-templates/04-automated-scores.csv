@@ -1,0 +1,6 @@
+Score ID,Skill ID,Dimension,Score,Raw Data,Timestamp,Script Version,Notes
+score-001,pytorch-skill-writer,Token Efficiency,9.0,"{""description_chars"": 1024, ""body_chars"": 3200, ""total_chars"": 4224, ""efficiency_score"": 9.0}",2025-12-26 12:00:00,v1.0,Well-optimized
+score-002,pytorch-skill-writer,Security Audit,10.0,"{""dangerous_patterns"": 0, ""warnings"": 0, ""rating"": ""Safe""}",2025-12-26 12:00:05,v1.0,No security concerns
+score-003,pytorch-skill-writer,Description Efficiency,8.5,"{""clarity"": 9, ""specificity"": 8, ""density"": 8.5, ""overall"": 8.5}",2025-12-26 12:00:10,v1.0,Clear and specific
+score-004,pytorch-skill-writer,Activation Rate,10.0,"{""attempts"": 10, ""successes"": 10, ""rate"": 1.0}",2025-12-26 12:00:15,v1.0,Perfect activation
+score-005,pytorch-skill-writer,Output Consistency,9.5,"{""similarity_scores"": [0.95, 0.96, 0.94], ""average"": 0.95}",2025-12-26 12:00:20,v1.0,Highly consistent

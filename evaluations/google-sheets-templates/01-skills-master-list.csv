@@ -1,0 +1,13 @@
+Skill ID,Skill Name,Repository,Stars,Category,Source,Last Updated,Status,SKILL.md Path,Notes
+pytorch-skill-writer,PyTorch Skill Writer,https://github.com/pytorch/pytorch,95362,Development,PyTorch,2025-11-26,In Progress,skills-data/raw-skills/pytorch-skill-writer/SKILL.md,Tested activation - excellent UX
+anthropic-frontend-design,Anthropic Frontend Design,https://github.com/anthropics/anthropic-sdk-python,4500,Design,Anthropic,2025-12-01,Not Started,skills-data/raw-skills/anthropic-frontend-design/SKILL.md,
+openai-skill-creator,OpenAI Skill Creator,https://github.com/openai/openai-python,8200,Development,OpenAI,2025-11-15,Not Started,skills-data/raw-skills/openai-skill-creator/SKILL.md,
+anthropic-mcp-integration,Anthropic MCP Integration,https://github.com/anthropics/anthropic-sdk-python,4500,Integration,Anthropic,2025-12-01,Not Started,skills-data/raw-skills/anthropic-mcp-integration/SKILL.md,
+pytorch-docstring,PyTorch Docstring,https://github.com/pytorch/pytorch,95362,Documentation,PyTorch,2025-11-26,Not Started,skills-data/raw-skills/pytorch-docstring/SKILL.md,
+anthropic-writing-rules,Anthropic Writing Rules,https://github.com/anthropics/anthropic-sdk-python,4500,Documentation,Anthropic,2025-12-01,Not Started,skills-data/raw-skills/anthropic-writing-rules/SKILL.md,
+anthropic-agent-development,Anthropic Agent Development,https://github.com/anthropics/anthropic-sdk-python,4500,Development,Anthropic,2025-12-01,Not Started,skills-data/raw-skills/anthropic-agent-development/SKILL.md,
+pytorch-add-uint-support,PyTorch Add Uint Support,https://github.com/pytorch/pytorch,95362,Development,PyTorch,2025-11-26,Not Started,skills-data/raw-skills/pytorch-add-uint-support/SKILL.md,
+pytorch-at-dispatch-v2,PyTorch AT Dispatch V2,https://github.com/pytorch/pytorch,95362,Development,PyTorch,2025-11-26,Not Started,skills-data/raw-skills/pytorch-at-dispatch-v2/SKILL.md,
+anthropic-hook-development,Anthropic Hook Development,https://github.com/anthropics/anthropic-sdk-python,4500,Development,Anthropic,2025-12-01,Not Started,skills-data/raw-skills/anthropic-hook-development/SKILL.md,
+openai-skill-installer,OpenAI Skill Installer,https://github.com/openai/openai-python,8200,Development,OpenAI,2025-11-15,Not Started,skills-data/raw-skills/openai-skill-installer/SKILL.md,
+anthropic-command-development,Anthropic Command Development,https://github.com/anthropics/anthropic-sdk-python,4500,Development,Anthropic,2025-12-01,Not Started,skills-data/raw-skills/anthropic-command-development/SKILL.md,
