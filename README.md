@@ -47,7 +47,7 @@ agent-lab/
 
 ## 🎯 Current Status
 
-**Last Updated:** Dec 27, 2025 - Session 5
+**Last Updated:** Dec 27, 2025 - Session 5 (Prompt Generation Phase)
 
 ### ✅ Completed
 
@@ -66,17 +66,23 @@ agent-lab/
 - ✅ **Anthropic API Skills Support Confirmed** - Can use API for automation
 - ✅ **Google Sheets Structure Designed** - 7 tabs, complete schema
 - ✅ **Excel File Generated** - Pre-configured with all tabs and sample data
-- ✅ **Test Prompts Generated** - 180 prompts (15 per skill × 12 skills)
 - ✅ **Google Sheet Created by User** - Ready for data population
-- ✅ **Automation Scripts:**
+- ✅ **Automation Scripts Built:**
   - Token Efficiency Analyzer (tested ✅)
   - Security Audit Scanner (tested ✅)
-  - Test Prompt Generator (tested ✅)
+  - Test Prompt Generator (built ✅, running 🔄)
+- ✅ **Prompt Template Iteration** - Tested 3 versions, selected best quality
+- 🔄 **Generating 180 Test Prompts** - Using Sonnet 4.5 API (in progress)
 
 ### 🚧 In Progress
 
-- **Building API-based evaluation scripts** for automated testing
-- **Preparing to populate Google Sheet** with evaluation data
+- **Generating high-quality test prompts via Anthropic API**
+  - Using Claude Sonnet 4.5 with dynamic templates
+  - 180 prompts total (15 per skill × 12 skills)
+  - Iterated templates 3 times for quality
+  - Running in background (~60-90 min ETA)
+  - Script: `scripts/generate-test-prompts.py`
+  - Output: `evaluations/test-prompts-generated.csv`
 
 ### 📋 Next Steps
 
@@ -198,17 +204,26 @@ python3 scripts/eval-security-audit.py skills-data/raw-skills/[skill-name]
 
 **Status:** Tested and working (pytorch-skill-writer: 10/10 Safe)
 
-### 3. Test Prompt Generator ✅
-**Purpose:** Generate all 180 test prompts for 12 skills
+### 3. Test Prompt Generator 🔄
+**Purpose:** Generate high-quality, skill-specific test prompts using Claude Sonnet 4.5
+
+**Features:**
+- Dynamic templates with skill-specific context
+- 5 prompt types: explicit, implicit, edge case, adversarial-confusion, adversarial-impossible
+- Iterated 3 times for quality optimization
+- 15 prompts per skill × 12 skills = 180 total
 
 **Usage:**
 ```bash
-python3 scripts/write-to-sheets.py
+export ANTHROPIC_API_KEY="your-key"
+python3 scripts/generate-test-prompts.py
 ```
 
-**Output:** CSV file with 180 prompts ready for import
+**Output:** `evaluations/test-prompts-generated.csv`
 
-**Status:** Tested and working
+**Status:** Running in background (~60-90 min ETA)
+
+**Cost:** ~$2.70 in Anthropic API credits
 
 ### 4-8. Coming Soon (API-Based)
 - `eval-description-efficiency.py` - GPT-5 judges description quality
