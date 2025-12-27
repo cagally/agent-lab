@@ -19,20 +19,20 @@ from datetime import date
 INPUT_FILE = '/home/ubuntu/agent-lab/evaluations/test-prompts-generated.csv'
 OUTPUT_FILE = '/home/ubuntu/agent-lab/evaluations/test-prompts-final.csv'
 
-# Skill ID to Name mapping
+# Skill ID to Name mapping (from user's Google Sheets)
 SKILL_NAMES = {
-    'at-dispatch-v2': 'AT_DISPATCH_V2 Converter',
-    'add-uint-support': 'Add UInt Support',
-    'skill-writer': 'Skill Writer',
-    'docstring': 'Docstring Writer',
-    'skill-creator': 'Skill Creator',
-    'skill-installer': 'Skill Installer',
-    'frontend-design': 'Frontend Design',
-    'hook-development': 'Hook Development',
-    'command-development': 'Command Development',
-    'agent-identifier': 'Agent Identifier',
-    'rule-identifier': 'Rule Identifier',
-    'mcp-integration': 'MCP Integration'
+    'skill-writer': 'PyTorch Skill Writer',
+    'frontend-design': 'Anthropic Frontend Design',
+    'skill-creator': 'OpenAI Skill Creator',
+    'mcp-integration': 'Anthropic MCP Integration',
+    'docstring': 'PyTorch Docstring',
+    'rule-identifier': 'Anthropic Writing Rules',
+    'agent-identifier': 'Anthropic Agent Development',
+    'add-uint-support': 'PyTorch Add Uint Support',
+    'at-dispatch-v2': 'PyTorch AT Dispatch V2',
+    'hook-development': 'Anthropic Hook Development',
+    'skill-installer': 'OpenAI Skill Installer',
+    'command-development': 'Anthropic Command Development'
 }
 
 # Prompt type mappings
