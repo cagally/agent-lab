@@ -19,6 +19,22 @@ from datetime import date
 INPUT_FILE = '/home/ubuntu/agent-lab/evaluations/test-prompts-generated.csv'
 OUTPUT_FILE = '/home/ubuntu/agent-lab/evaluations/test-prompts-final.csv'
 
+# Skill ID to Name mapping
+SKILL_NAMES = {
+    'at-dispatch-v2': 'AT_DISPATCH_V2 Converter',
+    'add-uint-support': 'Add UInt Support',
+    'skill-writer': 'Skill Writer',
+    'docstring': 'Docstring Writer',
+    'skill-creator': 'Skill Creator',
+    'skill-installer': 'Skill Installer',
+    'frontend-design': 'Frontend Design',
+    'hook-development': 'Hook Development',
+    'command-development': 'Command Development',
+    'agent-identifier': 'Agent Identifier',
+    'rule-identifier': 'Rule Identifier',
+    'mcp-integration': 'MCP Integration'
+}
+
 # Prompt type mappings
 TYPE_MAPPING = {
     'activation-explicit': 'Activation-Explicit',
@@ -133,6 +149,7 @@ def fix_csv():
         fixed_row = {
             'Prompt ID': generate_prompt_id(skill_id, prompt_type, prompt_number),
             'Skill ID': skill_id,
+            'Skill Name': SKILL_NAMES.get(skill_id, skill_id),
             'Prompt Type': TYPE_MAPPING.get(prompt_type, prompt_type),
             'Prompt Text': cleaned_text,
             'Expected Behavior': expected_behavior,
@@ -149,6 +166,7 @@ def fix_csv():
         fieldnames = [
             'Prompt ID',
             'Skill ID',
+            'Skill Name',
             'Prompt Type',
             'Prompt Text',
             'Expected Behavior',
