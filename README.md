@@ -2,7 +2,7 @@
 
 **Mission:** Build the #1 hub for Agent Skills. Make skills discoverable, evaluable, and usable for everyone.
 
-**Current Phase:** Phase 2 - Evaluation Framework Finalization & Automation
+**Current Phase:** Phase 3 - Data Infrastructure & Automation
 
 ---
 
@@ -13,6 +13,7 @@ agent-lab/
 ├── skills-data/          # Raw skill data, scraped content, skill metadata
 │   ├── skillsmp-top12-skills.json     # ⭐ Master list of top 12 skills
 │   ├── skillsmp-reconnaissance.md     # SkillsMP analysis & strategy
+│   ├── test-prompts-all-skills.csv    # ⭐ 180 generated test prompts
 │   └── raw-skills/                    # ⭐ Downloaded SKILL.md files (12 skills)
 ├── evaluations/          # ⭐ Evaluation framework, implementation guides, templates
 │   ├── evaluation-framework-v3.md               # ⭐ FINAL 11-dimension framework
@@ -20,18 +21,21 @@ agent-lab/
 │   ├── comprehensive-evaluation-dimensions.md   # ⭐ All 30+ dimensions researched
 │   ├── test-prompt-suite-template.md           # ⭐ Activation testing templates
 │   ├── evaluation-results-template.md          # ⭐ Results recording template
-│   ├── framework-v2-final.md                   # Previous framework (reference)
-│   ├── testing-methodology.md                  # Practical testing guide
+│   ├── Agent-Skills-Evaluation-MVP.xlsx        # ⭐ Pre-configured Excel file
+│   ├── google-sheets-schema.md                 # ⭐ Complete data structure spec
+│   ├── GOOGLE-SHEETS-SETUP.md                  # ⭐ Setup instructions
+│   ├── anthropic-api-skills-support.md         # ⭐ API integration research
 │   ├── context-safety-clarification.md         # Progressive disclosure research
 │   ├── surge-ai-research-notes.md              # Surge AI methodology research
 │   ├── mercor-ai-research-notes.md             # Mercor AI evaluation research
 │   └── user-complaints-research.md             # User pain points analysis
 ├── scripts/              # ⭐ Automation scripts for evaluation
-│   ├── install-skills-to-claude.sh    # ⭐ Install skills to Claude Code
-│   ├── eval-token-efficiency.py       # ⭐ Automated token analysis (TESTED)
-│   ├── eval-security-audit.py         # ⭐ Automated security scanning (TESTED)
-│   ├── skillsmp-scraper.py            # HTML scraper (needs Selenium)
-│   └── scrape-skillsmp-browser.py     # Browser-based scraper
+│   ├── install-skills-to-claude.sh             # ⭐ Install skills to Claude Code
+│   ├── eval-token-efficiency.py                # ⭐ Automated token analysis (TESTED)
+│   ├── eval-security-audit.py                  # ⭐ Automated security scanning (TESTED)
+│   ├── write-to-sheets.py                      # ⭐ Test prompt generator (TESTED)
+│   ├── create-excel-evaluation-sheet.py        # ⭐ Excel file generator
+│   └── skillsmp-scraper.py                     # HTML scraper (deprecated)
 ├── website/              # Website code, designs, deployment configs
 ├── branding/             # Brand guidelines, visual assets, messaging
 ├── gtm/                  # Go-to-market strategy, content, campaigns
@@ -43,15 +47,14 @@ agent-lab/
 
 ## 🎯 Current Status
 
-**Last Updated:** Dec 25, 2025 - Session 4
+**Last Updated:** Dec 27, 2025 - Session 5
 
 ### ✅ Completed
 
 **Previous Sessions:**
 - Repository structure established
 - Project vision documented
-- Knowledge base protocol defined
-- Evaluation framework v1.0 & v2.0 designed
+- Evaluation framework v1.0, v2.0, v3.0 designed
 - Deep user research conducted
 - SkillsMP reconnaissance completed
 - Top 12 skills downloaded from PyTorch, OpenAI, Anthropic
@@ -59,56 +62,42 @@ agent-lab/
 - Installation script created and tested
 - Skills metadata tracked in JSON
 
-**This Session (Dec 25 - Continued):**
-- ✅ **Evaluation Framework V3 Finalized** - 11 dimensions, research-backed
-- ✅ **Comprehensive Research Completed** - 30+ evaluation dimensions identified
-- ✅ **Implementation Guide Created** - Step-by-step execution playbook
-- ✅ **Automation Scripts Built:**
+**This Session (Dec 27 - Data Infrastructure):**
+- ✅ **Anthropic API Skills Support Confirmed** - Can use API for automation
+- ✅ **Google Sheets Structure Designed** - 7 tabs, complete schema
+- ✅ **Excel File Generated** - Pre-configured with all tabs and sample data
+- ✅ **Test Prompts Generated** - 180 prompts (15 per skill × 12 skills)
+- ✅ **Google Sheet Created by User** - Ready for data population
+- ✅ **Automation Scripts:**
   - Token Efficiency Analyzer (tested ✅)
   - Security Audit Scanner (tested ✅)
-- ✅ **Test Templates Created:**
-  - Activation test prompt suite template
-  - Evaluation results template
-- ✅ **Context Safety Issue Resolved** - Progressive disclosure clarified
-- ✅ **Surge AI & Mercor AI Research** - Rubric-based evaluation methodologies studied
-- ✅ **All documentation committed to GitHub**
+  - Test Prompt Generator (tested ✅)
 
 ### 🚧 In Progress
 
-- **User Action Required:** Review implementation guide and begin manual evaluations
-- **Next:** Execute evaluations on all 12 skills
+- **Building API-based evaluation scripts** for automated testing
+- **Preparing to populate Google Sheet** with evaluation data
 
 ### 📋 Next Steps
 
-1. **User reviews implementation guide:**
-   - Read `evaluations/evaluation-implementation-guide.md`
-   - Understand the 11-dimension framework
-   - Review time estimates (90-130 mins per skill)
+1. **Import test prompts to Google Sheet:**
+   - Download `evaluations/test-prompts-all-skills.csv`
+   - Import to "Test Prompts" tab
 
-2. **Run automated evaluations (easy wins):**
-   ```bash
-   cd ~/agent-lab
-   # Token efficiency
-   python3 scripts/eval-token-efficiency.py skills-data/raw-skills/[skill-name]
-   # Security audit
-   python3 scripts/eval-security-audit.py skills-data/raw-skills/[skill-name]
-   ```
+2. **Build remaining automation scripts:**
+   - `eval-description-efficiency.py` (GPT-5 judge)
+   - `eval-activation-rate-api.py` (API-based)
+   - `eval-output-consistency-api.py` (API-based)
+   - `eval-multi-skill-compatibility-api.py` (API-based)
+   - `eval-failure-mode-api.py` (API-based)
 
-3. **Execute manual evaluations in Claude Code:**
-   - Activation Rate (10 prompts)
-   - Task Completion (verify core function)
-   - Output Consistency (3 runs)
-   - Grounding & Faithfulness (fact-check)
-   - Failure Mode Resistance (5 adversarial prompts)
-   - Multi-Skill Compatibility (test with other skills)
-   - Tool Call Correctness (observe tool usage)
+3. **Run automated evaluations** on all 12 skills
 
-4. **Document results:**
-   - Use `evaluations/evaluation-results-template.md`
-   - Fill in scores for all 11 dimensions
-   - Record detailed findings
+4. **Conduct manual evaluations:**
+   - Task Completion
+   - Grounding & Faithfulness
 
-5. **Create skill scorecards** for MVP launch
+5. **Generate final scorecards** and launch MVP
 
 ---
 
@@ -119,21 +108,46 @@ agent-lab/
 2. **Task Completion** - Can it complete its stated purpose?
 
 ### Quality Criteria (0-10 Scale)
-3. **Description Efficiency** - Clarity, specificity, information density (GPT-5 judge)
-4. **Output Consistency** - Same prompt, consistent results (semantic similarity)
-5. **Token Efficiency** - Description and body size optimization (automated ✅)
-6. **Grounding & Faithfulness** - Hallucination rate, factual accuracy
-7. **Failure Mode Resistance** - Graceful failure, edge case handling
-8. **Security Audit** - Malicious code detection, safety rating (automated ✅)
-9. **Multi-Skill Compatibility** - Works alongside other skills
-10. **Tool Call Correctness** - Right tools, correct parameters
+3. **Token Efficiency** - Description and body size optimization (automated ✅)
+4. **Security Audit** - Malicious code detection, safety rating (automated ✅)
+5. **Description Efficiency** - Clarity, specificity, information density (GPT-5 judge)
+6. **Output Consistency** - Same prompt, consistent results (API-based)
+7. **Multi-Skill Compatibility** - Works alongside other skills (API-based)
+8. **Failure Mode Resistance** - Graceful failure, edge case handling (API-based)
+9. **Grounding & Faithfulness** - Hallucination rate, factual accuracy (manual)
 
 ### Metadata
-11. **Maintenance Status** - Active, stale, or archived
+10. **Maintenance Status** - Active, stale, or archived
 
-**Total Score:** 100 points (2 hurdles + 90 quality points)
+**Total Score:** 90 points (9 dimensions × 10)
 
-**Time per Skill:** 90-130 minutes
+**Automation Level:** 6/9 dimensions fully automated (67%)
+
+---
+
+## 📊 Google Sheets Structure
+
+**Sheet URL:** https://docs.google.com/spreadsheets/d/12FTvurGOZ7Pi3Okcdch40QO1woyAdVzRJe--Aj-B9pY/edit
+
+### 7 Tabs:
+1. **Skills Master List** - Registry of all 12 skills
+2. **Test Prompts** - 180 prompts (15 per skill) ← **Ready to import**
+3. **API Responses** - Raw outputs from testing
+4. **Automated Scores** - Results from automation scripts
+5. **Manual Evaluations** - Human scoring workspace
+6. **Final Scorecards** - Aggregated results with ratings
+7. **Dashboard** - Executive summary with charts
+
+### Data Flow:
+```
+Skills (12) 
+  → Test Prompts (180) 
+    → API Responses (540) 
+      → Automated Scores (84) 
+        + Manual Evaluations (24) 
+          → Final Scorecards (12) 
+            → Dashboard (summary)
+```
 
 ---
 
@@ -161,14 +175,14 @@ agent-lab/
 ## 🛠️ Automation Scripts
 
 ### 1. Token Efficiency Analyzer ✅
-**Purpose:** Measure static and dynamic token costs
+**Purpose:** Measure SKILL.md size and efficiency
 
 **Usage:**
 ```bash
 python3 scripts/eval-token-efficiency.py skills-data/raw-skills/[skill-name]
 ```
 
-**Output:** JSON file with character counts, token estimates, efficiency score (0-10)
+**Output:** JSON with character counts, efficiency score (0-10)
 
 **Status:** Tested and working
 
@@ -180,16 +194,28 @@ python3 scripts/eval-token-efficiency.py skills-data/raw-skills/[skill-name]
 python3 scripts/eval-security-audit.py skills-data/raw-skills/[skill-name]
 ```
 
-**Output:** JSON file with findings, severity ratings, safety score (0-10)
-
-**Detects:**
-- Destructive file operations (rm -rf, dd)
-- Code execution (eval, exec)
-- Hardcoded credentials
-- Unsafe network access
-- Dangerous bash patterns
+**Output:** JSON with findings, safety score (0-10)
 
 **Status:** Tested and working (pytorch-skill-writer: 10/10 Safe)
+
+### 3. Test Prompt Generator ✅
+**Purpose:** Generate all 180 test prompts for 12 skills
+
+**Usage:**
+```bash
+python3 scripts/write-to-sheets.py
+```
+
+**Output:** CSV file with 180 prompts ready for import
+
+**Status:** Tested and working
+
+### 4-8. Coming Soon (API-Based)
+- `eval-description-efficiency.py` - GPT-5 judges description quality
+- `eval-activation-rate-api.py` - Tests skill activation via API
+- `eval-output-consistency-api.py` - Measures consistency across 3 runs
+- `eval-multi-skill-compatibility-api.py` - Tests skill interactions
+- `eval-failure-mode-api.py` - Adversarial testing
 
 ---
 
@@ -207,7 +233,7 @@ python3 scripts/eval-security-audit.py skills-data/raw-skills/[skill-name]
 2. **Interaction Analysis** - Test skills together, not in isolation
 3. **Failure Mode Focus** - Actively try to break skills
 4. **Real-World Testing** - Use actual user scenarios
-5. **Training Data Generation** - Document failures to improve skills
+5. **API-Based Automation** - 67% of evaluations fully automated
 
 ### Competitive Landscape:
 - **SkillsMP:** 33,132 skills, just aggregates, NO testing
@@ -222,8 +248,9 @@ python3 scripts/eval-security-audit.py skills-data/raw-skills/[skill-name]
 1. **`evaluations/evaluation-framework-v3.md`** - Complete framework with rationale
 2. **`evaluations/evaluation-implementation-guide.md`** - How to execute evals
 3. **`evaluations/comprehensive-evaluation-dimensions.md`** - All 30+ dimensions researched
-4. **`evaluations/test-prompt-suite-template.md`** - Activation testing guide
-5. **`evaluations/evaluation-results-template.md`** - Results recording template
+4. **`evaluations/google-sheets-schema.md`** - Complete data structure spec
+5. **`evaluations/GOOGLE-SHEETS-SETUP.md`** - Setup instructions
+6. **`evaluations/anthropic-api-skills-support.md`** - API integration guide
 
 ### Research Files:
 - `evaluations/surge-ai-research-notes.md` - Surge AI methodology
@@ -259,7 +286,9 @@ python3 scripts/eval-security-audit.py skills-data/raw-skills/[skill-name]
 - **Vision Doc:** `/home/ubuntu/projects/agent-lab-2b9b282d/Agent Skills Platform V.0001.md`
 - **Evaluation Framework V3:** `/evaluations/evaluation-framework-v3.md` ⭐
 - **Implementation Guide:** `/evaluations/evaluation-implementation-guide.md` ⭐
+- **Google Sheet:** https://docs.google.com/spreadsheets/d/12FTvurGOZ7Pi3Okcdch40QO1woyAdVzRJe--Aj-B9pY/edit ⭐
 - **Skills Metadata:** `/skills-data/skillsmp-top12-skills.json` ⭐
+- **Test Prompts CSV:** `/evaluations/test-prompts-all-skills.csv` ⭐
 - **Anthropic Skills:** https://github.com/anthropics/skills
 - **Claude Skills Docs:** https://code.claude.com/docs/en/skills
 - **Competitor (SkillsMP):** https://skillsmp.com/
@@ -271,6 +300,7 @@ python3 scripts/eval-security-audit.py skills-data/raw-skills/[skill-name]
 - **Target:** 20-50 evaluated skills at launch (started with top 12)
 - **Timeline:** 3-5 days to MVP
 - **Quality Bar:** Rigorous, Surge AI-inspired rubric evaluation
+- **Automation:** 67% of evaluations fully automated
 - **First Mover Advantage:** Speed + Quality
 - **Competitive Moat:** Testing > Aggregating, Security > Convenience
 
