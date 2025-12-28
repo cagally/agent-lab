@@ -1,0 +1,15 @@
+# Sensitive files
+.anthropic_api_key
+credentials.json
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Logs
+*.log
+
+# IDE
+.vscode/
+.idea/

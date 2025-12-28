@@ -1,0 +1,67 @@
+[
+  {
+    "name": "at-dispatch-v2",
+    "skill_id": "skill_0182PDm4DHCe1ommUh41DSrC",
+    "success": true
+  },
+  {
+    "name": "add-uint-support",
+    "skill_id": "skill_01RewdkVCLoWvRQdyej78owk",
+    "success": true
+  },
+  {
+    "name": "skill-writer",
+    "skill_id": "skill_01WfzQ8PHskQch9prhBxhfdQ",
+    "success": true
+  },
+  {
+    "name": "docstring",
+    "skill_id": "skill_01NFqmUTkaikfHAnHZqXeF5w",
+    "success": true
+  },
+  {
+    "name": "skill-creator",
+    "skill_id": "skill_01SFguyLiHqddLLLxBEKMcpr",
+    "success": true
+  },
+  {
+    "name": "skill-installer",
+    "skill_id": "skill_01W46w5cKee2HyYS7iKZm3sA",
+    "success": true
+  },
+  {
+    "name": "frontend-design",
+    "skill_id": "skill_01RZCdNF32yNH3YCywU2LQXz",
+    "success": true
+  },
+  {
+    "name": "hook-development",
+    "skill_id": null,
+    "success": false,
+    "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': \"unexpected key in SKILL.md frontmatter: properties must be in ('name', 'description', 'license', 'allowed-tools', 'compatibility', 'metadata')\"}, 'request_id': 'req_011CWXpXv7uV65VgMwjbVsxr'}"
+  },
+  {
+    "name": "command-development",
+    "skill_id": null,
+    "success": false,
+    "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': \"unexpected key in SKILL.md frontmatter: properties must be in ('name', 'description', 'license', 'allowed-tools', 'compatibility', 'metadata')\"}, 'request_id': 'req_011CWXpXwfvAZzFrjq2mL6dq'}"
+  },
+  {
+    "name": "agent-identifier",
+    "skill_id": null,
+    "success": false,
+    "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': \"unexpected key in SKILL.md frontmatter: properties must be in ('name', 'description', 'license', 'allowed-tools', 'compatibility', 'metadata')\"}, 'request_id': 'req_011CWXpXyHtyA7u1vufDo5YN'}"
+  },
+  {
+    "name": "rule-identifier",
+    "skill_id": null,
+    "success": false,
+    "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': \"unexpected key in SKILL.md frontmatter: properties must be in ('name', 'description', 'license', 'allowed-tools', 'compatibility', 'metadata')\"}, 'request_id': 'req_011CWXpY144hhmmWGUcjCLuN'}"
+  },
+  {
+    "name": "mcp-integration",
+    "skill_id": null,
+    "success": false,
+    "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': \"unexpected key in SKILL.md frontmatter: properties must be in ('name', 'description', 'license', 'allowed-tools', 'compatibility', 'metadata')\"}, 'request_id': 'req_011CWXpY2sT98tEMoCfMtGTV'}"
+  }
+]
