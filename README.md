@@ -2,7 +2,7 @@
 
 **Mission:** Build the #1 hub for Agent Skills. Make skills discoverable, evaluable, and usable for everyone.
 
-**Current Phase:** Phase 4 - API Evaluation Automation (Running)
+**Current Phase:** Phase 4 - Activation Testing V2 (Redesign)
 
 ---
 
@@ -12,23 +12,22 @@
 agent-lab/
 ├── skills-data/          # Raw skill data, scraped content, skill metadata
 │   ├── skillsmp-top12-skills.json     # Master list of top 12 skills
-│   ├── skill-ids-map.json             # ⭐ Anthropic API skill ID mapping
-│   ├── skill-ids.json                 # ⭐ Full skill ID registry
-│   └── raw-skills/                    # ⭐ Downloaded SKILL.md files (12 skills, reorganized)
-├── evaluations/          # ⭐ Evaluation framework, implementation guides, templates
-│   ├── evaluation-framework-v3.md               # FINAL 11-dimension framework
-│   ├── evaluation-implementation-guide.md       # Step-by-step execution playbook
-│   ├── test-prompts-final.csv                   # ⭐ 180 cleaned test prompts (READY)
+│   ├── skill-ids-map.json             # Anthropic API skill ID mapping
+│   ├── skill-ids.json                 # Full skill ID registry
+│   └── raw-skills/                    # Downloaded SKILL.md files (12 skills)
+├── evaluations/          # Evaluation framework, implementation guides, results
+│   ├── evaluation-framework-v3.md                    # FINAL 11-dimension framework
+│   ├── lessons-learned-activation-testing.md         # ⭐ V1 post-mortem + V2 plan
+│   ├── brutal-analysis.md                            # ⭐ Honest analysis of failed approach
+│   ├── test-prompts-final.csv                        # 180 V1 prompts (too explicit)
 │   └── [other evaluation docs...]
-├── scripts/              # ⭐ Automation scripts for evaluation
-│   ├── run-api-tests-v2-fixed.py               # ⭐ Main evaluation script (RUNNING)
-│   ├── check-eval-progress.py                  # ⭐ Progress monitoring
-│   ├── estimate-completion.py                  # ⭐ ETA calculator
-│   ├── monitor-eval-loop.sh                    # ⭐ Background monitor
-│   ├── upload-skills-to-anthropic.py           # ⭐ Skill uploader
+├── scripts/              # Automation scripts for evaluation
+│   ├── run-api-tests-v2-fixed.py                     # V1 script (flawed detection)
+│   ├── check-eval-progress.py                        # Progress monitoring
+│   ├── estimate-completion.py                        # ETA calculator
 │   └── [other scripts...]
-├── research/             # ⭐ Research documentation
-│   └── real-world-skill-usage.md               # ⭐ Progressive disclosure findings
+├── research/             # Research documentation
+│   └── real-world-skill-usage.md                     # Progressive disclosure findings
 └── README.md            # This file - project status and navigation
 ```
 
@@ -36,7 +35,7 @@ agent-lab/
 
 ## 🎯 Current Status
 
-**Last Updated:** Dec 28, 2025 - Session 6 (API Evaluation Running)
+**Last Updated:** Dec 28, 2025 - Session 6 (Activation Testing V1 Failed, V2 Planning)
 
 ### ✅ Completed
 
@@ -48,82 +47,203 @@ agent-lab/
 - Automation scripts built and tested
 
 **Session 5 (Dec 27 - Prompt Generation):**
-- ✅ Generated 180 high-quality test prompts using Claude Sonnet 4.5
-- ✅ 5 prompt types: activation-explicit, activation-implicit, edge-case, adversarial-confusion, adversarial-impossible
-- ✅ Cleaned and formatted for Google Sheets import
-- ✅ Cost: $2.70 in API credits
+- ✅ Generated 180 test prompts using Claude Sonnet 4.5
+- ✅ 5 prompt types created
+- ✅ Cleaned and formatted for Google Sheets
+- ❌ **FLAW DISCOVERED:** Prompts too explicit, activation-guaranteed
 
-**Session 6 (Dec 28 - API Evaluation):**
-- ✅ **Skills uploaded to Anthropic API** - All 12 skills deployed with custom IDs
-- ✅ **Progressive disclosure research** - Confirmed metadata-only loading (~850 tokens/skill)
-- ✅ **Cost optimization** - Determined 2-3 skills per test is optimal
-- ✅ **Selective 3x testing** - Activation prompts 3x, edge/adversarial 1x
-- ✅ **Evaluation script optimized** - Implements selective testing with resume mode
-- 🔄 **Running 372 API tests** - Started at 19:23 GMT (30/372 completed)
+**Session 6 (Dec 28 - Activation Testing V1):**
+- ✅ Skills uploaded to Anthropic API
+- ✅ Progressive disclosure research completed
+- ✅ Ran 44 API tests across 2 skills
+- ❌ **FAILED:** 96% activation rate, no differentiation, data unusable
+- ✅ Identified 4 critical flaws in approach
+- ✅ Designed V2 approach with fixes
 
-### 🚧 In Progress
+### ❌ What Failed (Activation Testing V1)
 
-**API Evaluation (RUNNING NOW)**
-- **Script:** `scripts/run-api-tests-v2-fixed.py`
-- **Progress:** 30/372 tests (8.1%)
-- **Rate:** ~99 seconds per test (~1.7 minutes)
-- **ETA:** 5:00 AM GMT (Dec 28) - **9.5 hours remaining**
-- **Cost so far:** $0.14
-- **Estimated total cost:** $1.71 (output tokens only, ~306 avg tokens/test)
-- **Process:** Running in background with monitoring
-- **Output:** Google Sheets "API Responses" tab
+**Script:** `scripts/run-api-tests-v2-fixed.py`  
+**Tests:** 44 completed (stopped early)  
+**Cost:** $0.33  
+**Result:** Data is not useful for evaluation
 
-**Test Configuration:**
-- Activation prompts (96): 3 runs each = 288 tests
-- Edge case + Adversarial (84): 1 run each = 84 tests
-- Total: 372 tests (optimized from 540)
-- Skills per test: 2-3 (expected + 1-2 random competitors)
-- Delay: 4 seconds between API calls
+**Critical Flaws Identified:**
 
-### 📋 Next Steps
+1. **Prompts Too Explicit**
+   - Generated prompts mentioned exact skill names and use cases
+   - Result: 96.3% activation rate (no differentiation)
+   - Example bad prompt: "I need to add uint16 support to a PyTorch operator"
 
-1. **Wait for evaluation completion** (~9.5 hours)
-   - Monitor via `scripts/check-eval-progress.py`
-   - Logs in `evaluations/eval-run.log`
+2. **Detection Logic Too Naive**
+   - Marked ANY skill interaction as "activated"
+   - Couldn't distinguish "reading skill file" from "using skill"
+   - Result: 0 wrong activations, 100% consistency (suspicious)
 
-2. **Build 5 automated scoring scripts:**
-   - Token efficiency analyzer (already built ✅)
-   - Security audit scanner (already built ✅)
-   - Description efficiency analyzer (GPT-5 judge)
-   - Activation rate calculator (from API results)
-   - Output consistency analyzer (from 3x runs)
+3. **No Real Multi-Skill Testing**
+   - Never saw skill conflicts or wrong activations
+   - Loaded 2-3 skills but no interference detected
+   - Can't tell if skills play nicely or detection is broken
 
-3. **Populate Google Sheets with automated scores**
+4. **No Baseline or Negative Tests**
+   - Only tested prompts designed to activate
+   - No tests for "should NOT activate"
+   - Can't measure false positive rate or selectivity
 
-4. **Create manual testing guide** for user:
-   - Task completion testing
-   - Grounding & faithfulness evaluation
-
-5. **Generate final scorecards** and comparative analysis
+**See:** `evaluations/lessons-learned-activation-testing.md` for full post-mortem
 
 ---
 
-## 🔬 Evaluation Framework V3 (Final)
+## 🚧 Current Focus: Activation Testing V2
+
+### The Problem We're Solving
+
+**V1 gave us:** "These 2 skills activate when you explicitly ask for them"  
+**We need:** "Skill X activates 85% on relevant tasks, 5% false positives, handles conflicts well"
+
+### The V2 Approach
+
+**Goal:** Create activation testing that actually differentiates good skills from bad skills
+
+**Key Changes:**
+
+1. **Better Prompts (Manual, Human-Crafted)**
+   - Describe PROBLEMS, not solutions
+   - Natural language, not technical jargon
+   - Mix of positive, negative, conflict, and adversarial tests
+   - 60 prompts total (5 per skill)
+
+2. **Smarter Detection (5-Level Classification)**
+   - Level 0: No interaction
+   - Level 1: Skill consulted (read metadata)
+   - Level 2: Skill referenced (mentioned in response)
+   - Level 3: Skill activated (instructions followed)
+   - Level 4: Skill executed (code from skill ran)
+
+3. **Realistic Multi-Skill Scenarios**
+   - Single skill baseline
+   - Competitive skills (same domain)
+   - Full environment (8-10 skills)
+   - Wrong skill tests (different domains)
+
+4. **Clear Baselines and Thresholds**
+   - Positive tests: 80-95% activation (not 100%)
+   - Negative tests: 0-10% activation
+   - Consistency: Varies by difficulty
+   - False positive rate: <5% on unrelated prompts
+
+---
+
+## 📋 Next Steps: Activation Testing V2
+
+### Phase 1: Prompt Redesign (NEXT)
+**Objective:** Create 60 high-quality test prompts manually
+
+**Prompt types per skill (5 total):**
+- 2 Positive tests (should activate, varying difficulty)
+- 1 Negative test (should NOT activate, similar domain)
+- 1 Conflict test (ambiguous, multiple skills could apply)
+- 1 Adversarial test (should resist activation)
+
+**Example transformation:**
+
+| Old (V1 - Bad) | New (V2 - Good) |
+|----------------|-----------------|
+| "I need to add uint16 support to a PyTorch operator" | "My PyTorch model throws errors with 16-bit unsigned integer tensors. How do I fix this?" |
+| "Update my code to use AT_DISPATCH_V2 macros" | "I'm getting deprecation warnings about AT_DISPATCH in my C++ extension. What should I do?" |
+
+**Output:** `evaluations/test-prompts-v2.csv`  
+**Time:** 2-3 hours  
+**Cost:** $0 (manual work)
+
+---
+
+### Phase 2: Detection Logic Upgrade
+**Objective:** Implement 5-level activation detection
+
+**New script:** `scripts/run-api-tests-v3.py`
+
+**Key improvements:**
+- Parse tool calls more carefully (read vs. execute)
+- Analyze response content for skill patterns
+- Compare with baseline (run without skill)
+- Classify activation level (0-4)
+
+**Time:** 3-4 hours  
+**Cost:** $0 (coding work)
+
+---
+
+### Phase 3: Baseline Testing
+**Objective:** Establish baselines for each skill
+
+**Test matrix:** 6 tests × 12 skills = 72 tests
+- Positive (solo): Should activate
+- Positive (competitive): Should activate target
+- Negative (solo): Should NOT activate
+- Negative (competitive): Should NOT activate
+
+**Output:** `evaluations/baseline-results.csv`  
+**Time:** ~2 hours  
+**Cost:** ~$1-2
+
+---
+
+### Phase 4: Full Evaluation V2
+**Objective:** Run comprehensive testing with V2 improvements
+
+**Configuration:**
+- 60 prompts (5 per skill)
+- 3 runs for positive tests (consistency)
+- 1 run for negative/conflict/adversarial
+- Realistic multi-skill loading
+
+**Total:** ~120 tests  
+**Time:** ~3 hours  
+**Cost:** ~$3-5
+
+---
+
+### Phase 5: Analysis and Scoring
+**Objective:** Generate actionable insights
+
+**Metrics:**
+- Activation Reliability (0-10)
+- Selectivity (0-10)
+- Multi-Skill Behavior (0-10)
+- Overall Activation Score (0-10)
+
+**Output:** 
+- Per-skill scorecards
+- Comparative analysis
+- Actionable recommendations
+
+**Time:** 1 hour  
+**Cost:** $0
+
+---
+
+## 🔬 Evaluation Framework V3 (Updated)
 
 ### Hurdle Criteria (Pass/Fail)
-1. **Activation Rate** - Does it activate reliably? (≥80% = Pass)
-2. **Task Completion** - Can it complete its stated purpose?
+1. **Activation Rate** - Activates on relevant tasks (≥80% on positive tests)
+2. **Selectivity** - Resists false activation (≤10% on negative tests)
+3. **Task Completion** - Completes stated purpose when activated
 
 ### Quality Criteria (0-10 Scale)
-3. **Token Efficiency** - Description and body size optimization (automated ✅)
-4. **Security Audit** - Malicious code detection, safety rating (automated ✅)
-5. **Description Efficiency** - Clarity, specificity, information density (GPT-5 judge)
-6. **Output Consistency** - Same prompt, consistent results (API-based 🔄)
-7. **Multi-Skill Compatibility** - Works alongside other skills (API-based 🔄)
-8. **Failure Mode Resistance** - Graceful failure, edge case handling (API-based 🔄)
-9. **Grounding & Faithfulness** - Hallucination rate, factual accuracy (manual)
+4. **Token Efficiency** - Description and body size optimization (automated ✅)
+5. **Security Audit** - Malicious code detection, safety rating (automated ✅)
+6. **Description Efficiency** - Clarity, specificity, information density (GPT-5 judge)
+7. **Output Consistency** - Same prompt, consistent results (API-based 🔄 V2)
+8. **Multi-Skill Compatibility** - Works alongside other skills (API-based 🔄 V2)
+9. **Failure Mode Resistance** - Graceful failure, edge case handling (API-based 🔄 V2)
+10. **Grounding & Faithfulness** - Hallucination rate, factual accuracy (manual)
 
 ### Metadata
-10. **Maintenance Status** - Active, stale, or archived
+11. **Maintenance Status** - Active, stale, or archived
 
-**Total Score:** 90 points (9 dimensions × 10)
+**Total Score:** 100 points (10 dimensions × 10)
 
-**Automation Level:** 6/9 dimensions fully automated (67%)
+**Automation Level:** 6/10 dimensions automated (60%)
 
 ---
 
@@ -133,156 +253,89 @@ agent-lab/
 
 ### 7 Tabs:
 1. **Skills Master List** - Registry of all 12 skills
-2. **Test Prompts** - 180 prompts (15 per skill) ✅ Imported
-3. **API Responses** - Raw outputs from testing 🔄 Populating (30/372)
-4. **Automated Scores** - Results from automation scripts ⏳ Next
-5. **Manual Evaluations** - Human scoring workspace ⏳ Next
-6. **Final Scorecards** - Aggregated results with ratings ⏳ Next
-7. **Dashboard** - Executive summary with charts ⏳ Next
+2. **Test Prompts** - V1: 180 prompts (flawed), V2: 60 prompts (pending)
+3. **API Responses** - V1: 44 tests (unusable), V2: pending
+4. **Automated Scores** - Pending V2 results
+5. **Manual Evaluations** - Pending
+6. **Final Scorecards** - Pending
+7. **Dashboard** - Pending
 
 ---
 
 ## 📊 Skills Inventory (Top 12)
 
-All skills uploaded to Anthropic API with custom IDs. Reorganized folder structure for clarity.
+All skills uploaded to Anthropic API with custom IDs.
 
 | Skill Short ID | Full Name | API Skill ID | Eval Status |
 |----------------|-----------|--------------|-------------|
-| at-dispatch-v2 | pytorch-at-dispatch-v2 | skill_0182PDm4DHCe1ommUh41DSrC | 🔄 Testing |
-| docstring | pytorch-docstring | skill_0182PDm4DHCe1ommUh41DSrD | 🔄 Testing |
-| skill-writer | pytorch-skill-writer | skill_0182PDm4DHCe1ommUh41DSrE | 🔄 Testing |
-| add-uint-support | pytorch-add-uint-support | skill_0182PDm4DHCe1ommUh41DSrF | 🔄 Testing |
-| skill-creator | openai-skill-creator | skill_0182PDm4DHCe1ommUh41DSrG | 🔄 Testing |
-| skill-installer | openai-skill-installer | skill_0182PDm4DHCe1ommUh41DSrH | 🔄 Testing |
-| frontend-design | anthropic-frontend-design | skill_0182PDm4DHCe1ommUh41DSrI | 🔄 Testing |
-| hook-development | anthropic-hook-development | skill_0182PDm4DHCe1ommUh41DSrJ | 🔄 Testing |
-| command-development | anthropic-command-development | skill_0182PDm4DHCe1ommUh41DSrK | 🔄 Testing |
-| agent-development | anthropic-agent-development | skill_0182PDm4DHCe1ommUh41DSrL | 🔄 Testing |
-| writing-hookify-rules | anthropic-writing-rules | skill_0182PDm4DHCe1ommUh41DSrM | 🔄 Testing |
-| mcp-integration | anthropic-mcp-integration | skill_0182PDm4DHCe1ommUh41DSrN | 🔄 Testing |
-
-**Skill files:** `skills-data/raw-skills/[short-id]/SKILL.md`
-
-**Skill ID mapping:** `skills-data/skill-ids-map.json`
+| at-dispatch-v2 | pytorch-at-dispatch-v2 | skill_0182PDm4DHCe1ommUh41DSrC | ⏳ V2 Pending |
+| docstring | pytorch-docstring | skill_0182PDm4DHCe1ommUh41DSrD | ⏳ V2 Pending |
+| skill-writer | pytorch-skill-writer | skill_0182PDm4DHCe1ommUh41DSrE | ⏳ V2 Pending |
+| add-uint-support | pytorch-add-uint-support | skill_0182PDm4DHCe1ommUh41DSrF | ⏳ V2 Pending |
+| skill-creator | openai-skill-creator | skill_0182PDm4DHCe1ommUh41DSrG | ⏳ V2 Pending |
+| skill-installer | openai-skill-installer | skill_0182PDm4DHCe1ommUh41DSrH | ⏳ V2 Pending |
+| frontend-design | anthropic-frontend-design | skill_0182PDm4DHCe1ommUh41DSrI | ⏳ V2 Pending |
+| hook-development | anthropic-hook-development | skill_0182PDm4DHCe1ommUh41DSrJ | ⏳ V2 Pending |
+| command-development | anthropic-command-development | skill_0182PDm4DHCe1ommUh41DSrK | ⏳ V2 Pending |
+| agent-development | anthropic-agent-development | skill_0182PDm4DHCe1ommUh41DSrL | ⏳ V2 Pending |
+| writing-hookify-rules | anthropic-writing-rules | skill_0182PDm4DHCe1ommUh41DSrM | ⏳ V2 Pending |
+| mcp-integration | anthropic-mcp-integration | skill_0182PDm4DHCe1ommUh41DSrN | ⏳ V2 Pending |
 
 ---
 
 ## 🛠️ Automation Scripts
 
-### 1. API Evaluation Runner 🔄
-**Purpose:** Run 372 API tests with skills to measure activation, consistency, and compatibility
+### Working Scripts ✅
 
-**Usage:**
-```bash
-python3.11 scripts/run-api-tests-v2-fixed.py
-```
+1. **Token Efficiency Analyzer** - `scripts/eval-token-efficiency.py`
+2. **Security Audit Scanner** - `scripts/eval-security-audit.py`
 
-**Features:**
-- Selective 3x testing (activation prompts 3x, others 1x)
-- Resume mode (skips completed tests)
-- Retry logic with exponential backoff
-- 2-3 skills per test (cost-optimized)
-- 4-second delay between calls
-- Writes to Google Sheets in real-time
+### Failed Scripts ❌
 
-**Status:** Running in background (PID: 42094)
+3. **API Evaluation V1** - `scripts/run-api-tests-v2-fixed.py`
+   - Flawed detection logic
+   - Too-explicit prompts
+   - Data not useful
+   - See lessons learned document
 
-**Output:** Google Sheets "API Responses" tab
+### Planned Scripts 🔄
 
-**Cost:** $1.71 estimated (306 avg output tokens/test)
-
-### 2. Progress Monitor 🔄
-**Purpose:** Check evaluation progress without interrupting
-
-**Usage:**
-```bash
-python3.11 scripts/check-eval-progress.py
-```
-
-**Status:** Available
-
-### 3. ETA Calculator 🔄
-**Purpose:** Estimate completion time based on actual performance
-
-**Usage:**
-```bash
-python3.11 scripts/estimate-completion.py
-```
-
-**Status:** Available
-
-### 4. Token Efficiency Analyzer ✅
-**Purpose:** Measure SKILL.md size and efficiency
-
-**Usage:**
-```bash
-python3 scripts/eval-token-efficiency.py skills-data/raw-skills/[skill-name]
-```
-
-**Status:** Tested and working
-
-### 5. Security Audit Scanner ✅
-**Purpose:** Detect dangerous patterns and security risks
-
-**Usage:**
-```bash
-python3 scripts/eval-security-audit.py skills-data/raw-skills/[skill-name]
-```
-
-**Status:** Tested and working
-
-### 6-9. Coming Soon (After API Tests Complete)
-- `eval-description-efficiency.py` - GPT-5 judges description quality
-- `eval-activation-rate.py` - Calculate from API results
-- `eval-output-consistency.py` - Analyze 3x runs
-- `eval-multi-skill-compatibility.py` - Analyze skill interactions
+4. **API Evaluation V2** - `scripts/run-api-tests-v3.py` (to be built)
+   - 5-level activation detection
+   - Baseline comparison
+   - Multi-skill scenarios
+   - Realistic testing
 
 ---
 
 ## 💰 Cost Analysis
 
-### Actual Performance (30 tests completed):
-- **Output tokens:** 9,180 total (306 avg per test)
-- **Cost per test:** $0.0046
-- **Cost so far:** $0.14
-- **Estimated remaining:** $1.57
-- **Total estimated:** $1.71
+### Session 6 Costs:
+- Prompt generation (V1): $2.70
+- API testing (V1, 44 tests): $0.33
+- **Total V1:** $3.03
 
-### Original Estimates:
-- **Initial estimate (540 tests):** $23
-- **Optimized estimate (372 tests):** $17
-- **Actual (based on real data):** $1.71
+### V2 Estimated Costs:
+- Phase 1 (Prompts): $0 (manual)
+- Phase 2 (Detection): $0 (coding)
+- Phase 3 (Baseline): $1-2 (72 tests)
+- Phase 4 (Evaluation): $3-5 (120 tests)
+- Phase 5 (Analysis): $0 (analysis)
+- **Total V2:** $5-7
 
-**Savings:** $21.29 (93% reduction) due to:
-1. Selective 3x testing (saved $6)
-2. Lower than expected token usage (saved ~$15)
-3. Progressive disclosure working as expected
-
----
-
-## 🔬 Research Insights
-
-### Progressive Disclosure Confirmed:
-- Skills load **metadata only** until activated (~850 tokens/skill)
-- Full SKILL.md loads only when skill is used (~5,000 additional tokens)
-- 2-3 skills per test is optimal (matches real-world usage)
-- Massive cost savings vs. loading all skills upfront
-
-### Key Findings from User Research:
-- **#1 User Complaint:** Skills won't activate (Activation Rate is critical)
-- **#2 User Complaint:** No way to evaluate before installing
-- **#3 User Complaint:** Security concerns (no auditing exists)
-- **#4 User Complaint:** Skills conflict with each other
-- **#5 User Complaint:** Token waste and cost inefficiency
+### Lessons Learned:
+- Cheap tests with bad data = waste of money
+- Better to spend more on quality prompts and detection
+- Manual work upfront saves API costs later
 
 ---
 
 ## 📚 Key Documentation
 
 ### Must-Read Files:
-1. **`evaluations/evaluation-framework-v3.md`** - Complete framework with rationale
-2. **`evaluations/evaluation-implementation-guide.md`** - How to execute evals
-3. **`evaluations/test-prompts-final.csv`** - 180 ready-to-use test prompts
+1. **`evaluations/lessons-learned-activation-testing.md`** - ⭐ V1 post-mortem + V2 plan
+2. **`evaluations/brutal-analysis.md`** - ⭐ Honest analysis of what went wrong
+3. **`evaluations/evaluation-framework-v3.md`** - Complete framework
 4. **`skills-data/skill-ids-map.json`** - Anthropic API skill ID mapping
 5. **`research/real-world-skill-usage.md`** - Progressive disclosure research
 
@@ -292,46 +345,53 @@ python3 scripts/eval-security-audit.py skills-data/raw-skills/[skill-name]
 
 ### Session Start
 1. Read this README for latest status
-2. Check if evaluation is still running (`ps aux | grep run-api-tests`)
-3. Review progress (`python3.11 scripts/check-eval-progress.py`)
+2. Check `evaluations/lessons-learned-activation-testing.md` for V2 plan
+3. Understand what failed and why before starting new work
 
 ### During Session
-- Create and update files in appropriate folders
-- Build on existing context - no reinventing
-- Keep files organized and well-named
+- Don't repeat V1 mistakes (explicit prompts, naive detection)
+- Focus on quality over quantity
+- Test assumptions before running expensive operations
 
 ### Session End
-1. Update this README with:
-   - **Completed:** What you accomplished
-   - **In-Progress:** Current status
-   - **Next Steps:** What happens next
-2. Commit and push all changes with clear message
+1. Update this README with progress
+2. Document lessons learned
+3. Commit and push all changes
 
 ---
 
 ## 🚀 Quick Links
 
 - **Vision Doc:** `/home/ubuntu/projects/agent-lab-2b9b282d/Agent Skills Platform V.0001.md`
-- **Evaluation Framework V3:** `/evaluations/evaluation-framework-v3.md` ⭐
-- **Google Sheet:** https://docs.google.com/spreadsheets/d/12FTvurGOZ7Pi3Okcdch40QO1woyAdVzRJe--Aj-B9pY/edit ⭐
-- **Test Prompts CSV:** `/evaluations/test-prompts-final.csv` ⭐
-- **Skill ID Map:** `/skills-data/skill-ids-map.json` ⭐
+- **V2 Plan:** `/evaluations/lessons-learned-activation-testing.md` ⭐
+- **V1 Post-Mortem:** `/evaluations/brutal-analysis.md` ⭐
+- **Google Sheet:** https://docs.google.com/spreadsheets/d/12FTvurGOZ7Pi3Okcdch40QO1woyAdVzRJe--Aj-B9pY/edit
+- **Skill ID Map:** `/skills-data/skill-ids-map.json`
 - **Anthropic Skills:** https://github.com/anthropics/skills
-- **Claude Skills Docs:** https://code.claude.com/docs/en/skills
 
 ---
 
-## 📊 Key Metrics & Goals
+## 📊 Success Criteria for V2
 
-- **Target:** 20-50 evaluated skills at launch (started with top 12)
-- **Timeline:** 3-5 days to MVP
-- **Quality Bar:** Rigorous, Surge AI-inspired rubric evaluation
-- **Automation:** 67% of evaluations fully automated
-- **First Mover Advantage:** Speed + Quality
-- **Competitive Moat:** Testing > Aggregating, Security > Convenience
+We'll know V2 works if:
 
-**Current Progress:** Day 4, API evaluation running, on track for MVP
+1. **Activation rates vary by prompt type**
+   - NOT 96% across the board
+   - Positive: 80-95%, Negative: 0-10%, Conflict: 30-70%
+
+2. **We see skill differentiation**
+   - Some skills score 8-10, some 4-7, some 0-3
+   - NOT everyone at 9.5/10
+
+3. **We detect real issues**
+   - Wrong activations, false positives, inconsistencies
+   - NOT perfect behavior everywhere
+
+4. **Data is actionable**
+   - Can recommend skills based on scores
+   - Can explain WHY a skill scored low
+   - NOT just "it works" or "it doesn't"
 
 ---
 
-*This is our shared brain. Any agent can pick up where another left off.*
+*Next: Phase 1 - Manual prompt redesign (2-3 hours)*
