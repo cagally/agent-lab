@@ -1,103 +1,102 @@
 {
-  "scraped_at": "2025-12-30T19:30:08.843055",
+  "scraped_at": "2025-12-30T14:38:00Z",
   "total_skills": 12,
-  "note": "Top skills from manual observation - SkillsMP requires browser automation for full scraping",
   "skills": [
     {
-      "rank": 1,
       "name": "at-dispatch-v2",
-      "stars": 95400,
-      "stars_display": "95.4k",
+      "stars": "95.4k",
       "repository": "pytorch/pytorch",
-      "description": "Convert PyTorch AT_DISPATCH macros to AT_DISPATCH_V2 in ATen C++ code"
+      "url": "https://skillsmp.com/skills/pytorch-pytorch-claude-skills-at-dispatch-v2-skill-md",
+      "description": "",
+      "rank": 1
     },
     {
-      "rank": 2,
       "name": "add-uint-support",
-      "stars": 95400,
-      "stars_display": "95.4k",
+      "stars": "95.4k",
       "repository": "pytorch/pytorch",
-      "description": "Add unsigned integer (uint) type support to PyTorch operators"
+      "url": "https://skillsmp.com/skills/pytorch-pytorch-claude-skills-add-uint-support-skill-md",
+      "description": "",
+      "rank": 2
     },
     {
-      "rank": 3,
       "name": "skill-writer",
-      "stars": 95400,
-      "stars_display": "95.4k",
+      "stars": "95.4k",
       "repository": "pytorch/pytorch",
-      "description": "Guide users through creating Agent Skills for Claude Code"
+      "url": "https://skillsmp.com/skills/pytorch-pytorch-claude-skills-skill-writer-skill-md",
+      "description": "",
+      "rank": 3
     },
     {
-      "rank": 4,
       "name": "docstring",
-      "stars": 95400,
-      "stars_display": "95.4k",
+      "stars": "95.4k",
       "repository": "pytorch/pytorch",
-      "description": "Write docstrings for PyTorch functions and methods"
+      "url": "https://skillsmp.com/skills/pytorch-pytorch-claude-skills-docstring-skill-md",
+      "description": "",
+      "rank": 4
     },
     {
-      "rank": 5,
       "name": "skill-creator",
-      "stars": 54700,
-      "stars_display": "54.7k",
+      "stars": "54.7k",
       "repository": "openai/codex",
-      "description": "Guide for creating effective skills"
+      "url": "https://skillsmp.com/skills/openai-codex-codex-rs-core-src-skills-assets-samples-skill-creator-skill-md",
+      "description": "",
+      "rank": 5
     },
     {
-      "rank": 6,
       "name": "skill-installer",
-      "stars": 54700,
-      "stars_display": "54.7k",
+      "stars": "54.7k",
       "repository": "openai/codex",
-      "description": "Install Codex skills into $CODEX_HOME/skills"
+      "url": "https://skillsmp.com/skills/openai-codex-codex-rs-core-src-skills-assets-samples-skill-installer-skill-md",
+      "description": "",
+      "rank": 6
     },
     {
-      "rank": 7,
       "name": "frontend-design",
-      "stars": 47900,
-      "stars_display": "47.9k",
+      "stars": "47.9k",
       "repository": "anthropics/claude-code",
-      "description": "Create distinctive, production-grade frontend interfaces"
+      "url": "https://skillsmp.com/skills/anthropics-claude-code-plugins-frontend-design-skills-frontend-design-skill-md",
+      "description": "",
+      "rank": 7
     },
     {
-      "rank": 8,
       "name": "hook-development",
-      "stars": 47900,
-      "stars_display": "47.9k",
+      "stars": "47.9k",
       "repository": "anthropics/claude-code",
-      "description": "Create hooks for Claude Code"
+      "url": "https://skillsmp.com/skills/anthropics-claude-code-plugins-plugin-dev-skills-hook-development-skill-md",
+      "description": "",
+      "rank": 8
     },
     {
-      "rank": 9,
       "name": "command-development",
-      "stars": 47900,
-      "stars_display": "47.9k",
+      "stars": "47.9k",
       "repository": "anthropics/claude-code",
-      "description": "Create commands for Claude Code"
+      "url": "https://skillsmp.com/skills/anthropics-claude-code-plugins-plugin-dev-skills-command-development-skill-md",
+      "description": "",
+      "rank": 9
     },
     {
-      "rank": 10,
       "name": "agent-identifier",
-      "stars": 47900,
-      "stars_display": "47.9k",
+      "stars": "47.9k",
       "repository": "anthropics/claude-code",
-      "description": "Identify which agent is being used"
+      "url": "https://skillsmp.com/skills/anthropics-claude-code-plugins-plugin-dev-skills-agent-development-skill-md",
+      "description": "",
+      "rank": 10
     },
     {
-      "rank": 11,
       "name": "rule-identifier",
-      "stars": 47900,
-      "stars_display": "47.9k",
+      "stars": "47.9k",
       "repository": "anthropics/claude-code",
-      "description": "Identify hookify rules"
+      "url": "https://skillsmp.com/skills/anthropics-claude-code-plugins-hookify-skills-writing-rules-skill-md",
+      "description": "",
+      "rank": 11
     },
     {
-      "rank": 12,
       "name": "mcp-integration",
-      "stars": 47900,
-      "stars_display": "47.9k",
+      "stars": "47.9k",
       "repository": "anthropics/claude-code",
-      "description": "Integrate MCP servers with Claude Code"
+      "url": "https://skillsmp.com/skills/anthropics-claude-code-plugins-plugin-dev-skills-mcp-integration-skill-md",
+      "description": "",
+      "rank": 12
     }
   ]
 }
